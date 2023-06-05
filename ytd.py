@@ -2,8 +2,8 @@ from pytube import YouTube
 from moviepy.editor import *
 import os
 
-VIDEO_SAVE_DIRECTORY = "D:\\Videos\\YT Downloads"
-AUDIO_SAVE_DIRECTORY = "D:\\Music\\YT Downloads"
+VIDEO_SAVE_DIRECTORY = "D:\\Downloads\\YT Downloads\\Video"
+AUDIO_SAVE_DIRECTORY = "D:\\Downloads\\YT Downloads\\Audio"
 
 def download_video(video_url):
     video = YouTube(video_url)
