@@ -5,6 +5,9 @@ import os
 VIDEO_SAVE_DIRECTORY = "D:\\Downloads\\YT Downloads\\Video"
 AUDIO_SAVE_DIRECTORY = "D:\\Downloads\\YT Downloads\\Audio"
 
+os.makedirs(os.path.dirname(VIDEO_SAVE_DIRECTORY), exist_ok=True)
+os.makedirs(os.path.dirname(AUDIO_SAVE_DIRECTORY), exist_ok=True)
+
 def download_video(video_url):
     video = YouTube(video_url)
     video = video.streams.get_highest_resolution()
