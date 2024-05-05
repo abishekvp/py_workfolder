@@ -2,8 +2,8 @@ from pytube import YouTube
 from moviepy.editor import *
 import os
 
-VIDEO_SAVE_DIRECTORY = "D:\\Downloads\\YT Downloads\\Video"
-AUDIO_SAVE_DIRECTORY = "D:\\Downloads\\YT Downloads\\Audio"
+AUDIO_SAVE_DIRECTORY = "D:\\Audio"
+VIDEO_SAVE_DIRECTORY = "E:\\Videos"
 
 os.makedirs(os.path.dirname(VIDEO_SAVE_DIRECTORY), exist_ok=True)
 os.makedirs(os.path.dirname(AUDIO_SAVE_DIRECTORY), exist_ok=True)
@@ -30,10 +30,13 @@ def download_audio(video_url):
         video.close()
         os.remove(str(loc).replace(".mp3",".mp4"))
     except:return 0
-    
-link=input("Link : ")
 
-if "vid" in link:
-    link = link.split(" ")[1]
-    download_video(link)
-else:download_audio(link)
+while True:
+    
+    link=input("Link : ")
+
+    if "vid" in link:
+        link = link.split(" ")[1]
+        download_video(link)
+    else:download_audio(link)
+
