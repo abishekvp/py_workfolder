@@ -6,11 +6,11 @@ from moviepy.editor import *
 import os
 TOKEN = '5148319110:AAGe4XFc8akli8Hbr2r3LF0QZPyc-WZ3Pto'
 
-AUDIO_SAVE_DIRECTORY = "E:\\Music"
-VIDEO_SAVE_DIRECTORY = "E:\\Videos"
+AUDIO_SAVE_DIRECTORY = "Audio"
+VIDEO_SAVE_DIRECTORY = "Video"
 
-os.makedirs(os.path.dirname(VIDEO_SAVE_DIRECTORY), exist_ok=True)
-os.makedirs(os.path.dirname(AUDIO_SAVE_DIRECTORY), exist_ok=True)
+os.makedirs(VIDEO_SAVE_DIRECTORY, exist_ok=True)
+os.makedirs(AUDIO_SAVE_DIRECTORY, exist_ok=True)
 
 def download_video(video_url):
     video = YouTube(video_url)
@@ -35,16 +35,30 @@ def download_audio(video_url):
         os.remove(str(loc).replace(".mp3",".mp4"))
     except:return 0
 
+
+def MakeReply(mesg):
+    if "Hi" in mesg:
+        return "Hello"
+    elif "Hello" in mesg:
+        return "Hi"
+    else:
+        return "I am a bot, I don't understand that"
+
+
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     reply_mesg = "Hi"
     await context.bot.send_message(chat_id=update.effective_chat.id, text=reply_mesg)
 
 async def HandleMessage(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     mesg = update.message.text
-    if "youtube.com" or "youtu.be" in mesg:
+    print(mesg)
+    if "youtube.com" in mesg or "youtu.be" in mesg:
         download_audio(mesg)
         mesg = 'Audio Donwloaded'
         await context.bot.send_message(chat_id=update.effective_chat.id, text=mesg)
+    else:
+        await context.bot.send_message(chat_id=update.effective_chat.id, text=MakeReply(mesg))
+        
 
 def main():
     application = Application.builder().token(TOKEN).build()
